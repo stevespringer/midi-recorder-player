@@ -2,6 +2,8 @@
 
 source settings.conf
 
+announce_channel="0:1"
+
 while true
 do
 
@@ -16,7 +18,7 @@ do
 		arecordmidi -p $MidiDevice $filename &
 		recordingpid=$!
 
-		aseqdump -p 0:1,$MidiDevice > "$pipe" &
+		aseqdump -p $announce_channel,$MidiDevice > "$pipe" &
                 pid=$!
 
 		result=$(awk '{
@@ -54,7 +56,7 @@ do
 
 		echo "$MidiDevice not found, listening..."
 
-		aseqdump -p 0:1 > "$pipe" &
+		aseqdump -p $announce_channel > "$pipe" &
 		pid=$!
 
 		grep -m 1 -E 'Port start\s*20\:0' "$pipe"
