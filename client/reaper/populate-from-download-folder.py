@@ -9,7 +9,7 @@ for i in range(num_tracks - 1, -1, -1):
     # Delete the track
     RPR_DeleteTrack(track)
 
-directory = r"C:\Users\steve\Downloads\macminimidi\reaperdownloads"
+directory = r"DOWNLOADFOLDER"
 
 # Get the list of files in the directory
 files = os.listdir(directory)

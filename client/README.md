@@ -12,7 +12,7 @@ The python implementation is pretty limited, and I didn't want to learn the othe
 
 Autohotkey doesn't give you a simple build in way to read the standard out of a Run command (AFAIK).
 
-## Why the shell script to "generate" the python reascript?
+## Why the python script to "generate" the python reascript?
 
 I needed to pass the midi folder path but python reascript doesn't know what the executing script path is to read the config file.
 
