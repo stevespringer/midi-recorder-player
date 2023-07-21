@@ -1,0 +1,44 @@
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720213349.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:['file-client.py', '--host', 'ubuntu-server', '--port', '65432', 'list', '7', 'C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv']
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:['file-client.py', '--host', 'ubuntu-server', '--port', '65432', 'get', '20230720205400.mid', 'C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads']
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:['file-client.py', '--host', 'ubuntu-server', '--port', '65432', 'list', '7', 'C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv']
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:['file-client.py', '--host', 'ubuntu-server', '--port', '65432', 'get', '20230718110402.mid', 'C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads']
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230718110402.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 list 7 C:\Users\steve\AppData\Local\Temp\midimenucontents.csv
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230720205400.mid C:\Users\steve\Downloads\macminimidi\reaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230720205400.mid C:UserssteveDownloadsmacminimidireaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:UserssteveDownloadsmacminimidireaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230720205400.mid C:UserssteveDownloadsmacminimidireaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:UserssteveDownloadsmacminimidireaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 list 7 C:\Users\steve\AppData\Local\Temp\midimenucontents.csv
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230719105602.mid C:\Users\steve\Downloads\macminimidi\reaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230719105602.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230720205400.mid C:UserssteveDownloadsmacminimidireaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:UserssteveDownloadsmacminimidireaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230720205400.mid C:UserssteveDownloadsmacminimidireaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:UserssteveDownloadsmacminimidireaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230720205400.mid C:\Users\steve\Downloads\macminimidi\reaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:file-client.py --host ubuntu-server --port 65432 get -h
+INFO:root:file-client.py --host ubuntu-server --port 65432 get 20230720205400.mid C:\Users\steve\Downloads\macminimidi\reaperdownloads
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230720205400.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='list', numdays=7, outfile='C:\\Users\\steve\\AppData\\Local\\Temp\\midimenucontents.csv')
+INFO:root:Namespace(host='ubuntu-server', port=65432, command='get', sessionid='20230718212826.mid', outputdirectory='C:\\Users\\steve\\Downloads\\macminimidi\\reaperdownloads')
