@@ -59,7 +59,7 @@ do
 		aseqdump -p $announce_channel > "$pipe" &
 		pid=$!
 
-		grep -m 1 -E 'Port start\s*20\:0' "$pipe"
+		grep -m 1 -E 'Port start' "$pipe"
 		kill -INT $pid
 		
 	fi
