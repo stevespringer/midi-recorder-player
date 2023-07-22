@@ -63,7 +63,7 @@ def format_group(group):
 
         file_count = len(group)
 
-        date = creation_time.strftime("%d/%m")
+        date = creation_time.strftime("%d/%-m")
         start_time = creation_time.strftime("%H:%M")
         duration = "%02d:%02d" % (minutes, seconds)
         return (date, start_time, duration, file_count, first_file['filename'])
