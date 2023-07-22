@@ -1,4 +1,4 @@
-# Always on MIDI Recorder and file server
+# Always on MIDI Recorder and File Server
 
 This consists of:
 
