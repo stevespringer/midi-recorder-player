@@ -5,8 +5,8 @@ import argparse
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-def get_recent_file_groups(directory):
-    # Get a list of all files in the directory
+def get_recent_files(directory):
+    
     files = os.listdir(directory)
 
     # Sort the files by their modification time in descending order
@@ -22,11 +22,27 @@ def get_recent_file_groups(directory):
         timestamp = file_name.split(".")[0]
         creation_time = datetime.strptime(timestamp, "%Y%m%d%H%M%S")
 
+        yield {'filename': file_name, 'creation_time': creation_time, 'modification_time': modification_time}
+
+
+def get_recent_file_groups(directory):
+    
+    sorted_files = get_recent_files(directory)
+
+    groups = []
+    current_group = []
+    prev_modification_time = None
+
+    for file in sorted_files:
+        file_name = file['filename']
+        modification_time = file['modification_time']
+        creation_time = file['creation_time']
+
         if prev_modification_time is None or prev_modification_time - creation_time <= timedelta(seconds=1000):
-            current_group.append({'filename': file_name, 'creation_time': creation_time, 'modification_time': modification_time})
+            current_group.append(file)
         else:
             groups.append(current_group)
-            current_group = [{'filename': file_name, 'creation_time': creation_time, 'modification_time': modification_time}]
+            current_group = [file]
 
         prev_modification_time = modification_time
 
@@ -113,7 +129,20 @@ def groups_to_csv(groups):
         records.append(','.join(str(i) for i in group))
     return '\n'.join(records)
 
-def listen_for_get_files_requests(port, directory):
+
+def write_to_named_pipe(pipe_name, data):
+    with open(pipe_name, 'w') as f:
+        f.write(data)
+
+def replay_latest_recording(directory, replaydevice):
+    
+    pipe_name = "midipipe"
+    data_to_write = "STOP\n"
+
+    files = list(get_recent_files(directory))
+    write_to_named_pipe(pipe_name, data_to_write)
+    
+def listen_for_get_files_requests(port, directory, replaydevice):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_sock:
         server_sock.bind(('0.0.0.0', port))
         server_sock.listen()
@@ -144,6 +173,10 @@ def listen_for_get_files_requests(port, directory):
                 
                 client_sock.sendall(response.encode('utf-8'))
 
+            elif request.startswith("REPLAY"):
+                replay_latest_recording(directory, replaydevice)
+                client_sock.sendall("OK".encode('utf-8'))
+
             client_sock.close()
 
 if __name__ == '__main__':
@@ -151,9 +184,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Session Manager')
     parser.add_argument('folder', type=str, help='The path to the folder containing the midi recordings to serve')
     parser.add_argument('port', type=int, help='TCP Port to listen on')
+    parser.add_argument('mididevice', type=str, help='MIDI Device for replay')
 
     args = parser.parse_args()
 
-    listen_for_get_files_requests(args.port, args.folder)
+    listen_for_get_files_requests(args.port, args.folder, args.mididevice)
+
 
 

@@ -3,12 +3,14 @@
 source settings.conf
 
 announce_channel="0:1"
+pipe="midipipe"
+
+if [ ! -p "$pipe" ]; then
+    mkfifo -m 600 -- "$pipe" || exit
+fi
 
 while true
 do
-
-	pipe=$(mktemp -u) || exit
-	mkfifo -m 600 -- "$pipe" || exit
 
 	if aseqdump -l | grep $MidiDevice >/dev/null ; then
 		
@@ -21,16 +23,16 @@ do
 		aseqdump -p $announce_channel,$MidiDevice > "$pipe" &
                 pid=$!
 
-		result=$(awk '{
-    if (/controller 67, value 127/) {print something_happened ? "save" : "replay"; exit 0;}
-    if (/Port exit/) {print "disconnected"; exit 0;}
-    if (/Note on/) something_happened = 1;
+		result=$(awk -v output='cancel' '{
+    if (/controller 67, value 127/) {exit}
+    if (/Port exit/) {exit}
+    if (/STOP/) {output = output "replay"; exit;}	    
+    if (/Note on/) output = "save";
     if (/Active Sensing/) {
         if ($0 == prev_line) {
             count++;
-	    if (count > 50 && something_happened) {
-          	print "silence";
-		exit 0;
+	    if (count > 50 && output == "save") {
+		exit;
     	    }
         }
     } 
@@ -38,19 +40,28 @@ do
         count = 1;
     }
     prev_line = $0;
-}' < "$pipe")
+  }
+  END {
+    print output;
+  }' < "$pipe")
 
-		echo "Saving recording"
+		echo "Saving recording $filename $result"
                 kill -INT $pid $recordingpid
+		if [[ $result == cancel* ]]; then
+		    echo "No notes played, removing recording"
+		    rm -f $filename
+		fi
 
-#		if [ $result == "replay" ]; then
-#
-#		    echo "playing"
-#		    rm -f $filename
-		    
-#		    ls /var/local/midirecordings/*.mid -td | head -1 | xargs ./midi-utilities/bin/playsmf --out 1
 
-#		fi
+                if [[ $result == *replay ]]; then
+
+
+		   playfilename=$(ls /var/local/midirecordings/*.mid -td | head -1)
+                   echo "playing $playfilename"
+
+		   aplaymidi -p $MidiDevice $playfilename &
+
+               fi
 
 	else
 
@@ -64,6 +75,6 @@ do
 		
 	fi
 
-	rm -f -- "$pipe"
+#	rm -f -- "$pipe"
 
 done

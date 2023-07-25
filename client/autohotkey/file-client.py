@@ -19,13 +19,11 @@ def decode_file_contents(encoded_contents):
     decoded_contents = base64.b64decode(encoded_contents)
     return decoded_contents
 
-def recreate_files_from_tcp(connection_details, first_file_of_session, output_directory):
-
+def send_request(connection_details, request):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.connect(connection_details)
 
         group_number = 0
-        request = f"GETFILES {first_file_of_session}"
         sock.sendall(request.encode('utf-8'))
 
         data = b""
@@ -35,9 +33,16 @@ def recreate_files_from_tcp(connection_details, first_file_of_session, output_di
                 break
             data += chunk
 
+        return data.decode('utf-8')
+
+def recreate_files_from_tcp(connection_details, first_file_of_session, output_directory):
+    group_number = 0
+    request = f"GETFILES {first_file_of_session}"
+    response = send_request(request)
+
     delete_folder_contents(output_directory)
 
-    lines = data.decode('utf-8').split('\n')
+    lines = response.split('\n')
 
     for i in range(0, len(lines)-1, 2):
         file_name = lines[i].strip()
@@ -50,22 +55,12 @@ def recreate_files_from_tcp(connection_details, first_file_of_session, output_di
             output_file.write(decoded_contents)
 
 def list_recent_file_groups(connection_details, num_days, out_file):
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        sock.connect(connection_details)
+    request = f"LISTFILES {num_days}"
+    response = send_request(request)
 
-        request = f"LISTFILES {num_days}"
-        sock.sendall(request.encode('utf-8'))
-
-        data = b""
-        while True:
-            chunk = sock.recv(4096)
-            if not chunk:
-                break
-            data += chunk
-
-        text_file = open(out_file, "w")
-        text_file.write(data.decode('utf-8'))
-        text_file.close()
+    text_file = open(out_file, "w")
+    text_file.write(response)
+    text_file.close()
 
 def get_command(connection_details, args):
     session_id = args.sessionid
@@ -76,6 +71,11 @@ def list_command(connection_details, args):
     num_days = args.numdays
     out_file = args.outfile
     list_recent_file_groups(connection_details, num_days, out_file)
+
+def replay_command(connection_details):
+    request = "REPLAY"
+    response = send_request(request)
+    print(response)    
 
 if __name__ == '__main__':
 
@@ -94,6 +94,9 @@ if __name__ == '__main__':
     list_parser.add_argument('numdays', type=int, help='Number of past days to retrieve sessions for')
     list_parser.add_argument('outfile', type=str, help='Local file path to write the session list csv to')
 
+    # 'replay' command
+    replay_parser = subparsers.add_parser('replay', help='Replay latest recording')
+
     args = parser.parse_args()
 
     connection_details = (args.host, args.port)
@@ -102,6 +105,8 @@ if __name__ == '__main__':
         get_command(connection_details, args)
     elif args.command == 'list':
         list_command(connection_details, args)
+    elif args.command == 'replay':
+        replay_command(connection_details)
     else:
         print('Invalid command')
 
